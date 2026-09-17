@@ -259,4 +259,32 @@ public class ListeSimpleTest {
         System.out.println(listeATester);
         assertEquals("ListeSimple(Noeud(4), Noeud(2), Noeud(3), Noeud(1), Noeud(5))", listeATester.toString());
     }
+
+    @Test
+    public void echangerMemeNoeud() {
+        listeATester.ajout(1);
+        Noeud n = listeATester.tete;
+        listeATester.echanger(n, n);
+        // Vérifie que la liste n'a pas bougé
+        assertEquals(1, listeATester.getSize());
+        assertEquals(1, listeATester.tete.getElement());
+    }
+
+    @Test
+    public void modifiePremierElementAbsent() {
+        listeATester.ajout(1);
+        listeATester.ajout(2);
+        listeATester.modifiePremier(99, 42); // 99 n'existe pas
+        // La liste ne doit pas avoir changé
+        assertEquals(2, listeATester.getSize());
+        assertEquals(2, listeATester.tete.getElement());
+    }
+
+    @Test
+    public void supprimePremierElementAbsentDansListeNonVide() {
+        listeATester.ajout(1);
+        listeATester.ajout(2);
+        listeATester.supprimePremier(99); // 99 n'est ni en tête ni plus loin
+        assertEquals(2, listeATester.getSize());
+    }
 }
