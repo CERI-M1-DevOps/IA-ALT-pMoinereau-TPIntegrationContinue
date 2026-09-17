@@ -24,6 +24,9 @@ jobs:
       - name: Générer la Javadoc
         run: mvn -B javadoc:javadoc
 
+      - name: Vérifier l'emplacement de la Javadoc
+        run: ls -la target/site/
+
       - name: Déployer vers GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
