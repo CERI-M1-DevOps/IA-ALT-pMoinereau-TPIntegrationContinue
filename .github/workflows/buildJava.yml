@@ -17,6 +17,13 @@ jobs:
           java-version: '21'
           distribution: 'corretto'
 
+      - name: Cache SonarQube packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sona
+
       - name: cache Maven packages
         uses: actions/cache@v4
         with:
