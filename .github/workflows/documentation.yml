@@ -1,0 +1,31 @@
+name: Deploy Documentation
+
+on: 
+  push: 
+    branches:
+      - main
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: clone repo
+        uses: actions/checkout@v4
+
+      - name: setup java
+        uses: actions/setup-java@v4
+        with: 
+          java-version: '21'
+          distribution: 'corretto'
+
+      - name: Générer la Javadoc
+        run: mvn -B javadoc:javadoc
+
+      - name: Déployer vers GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/site/apidocs
